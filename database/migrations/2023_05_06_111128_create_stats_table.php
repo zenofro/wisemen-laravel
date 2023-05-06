@@ -12,8 +12,8 @@ return new class extends Migration {
             $table->id();
             $table->foreignIdFor(Pokemon::class)->constrained()->cascadeOnDelete();
             $table->string('stat');
-            $table->string('effort');
-            $table->string('base_stat');
+            $table->integer('effort');
+            $table->integer('base_stat');
             $table->timestamps();
         });
     }
