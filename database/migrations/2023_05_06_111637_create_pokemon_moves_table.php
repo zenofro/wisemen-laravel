@@ -8,17 +8,16 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up()
     {
-        Schema::create('types', function (Blueprint $table) {
+        Schema::create('pokemon_moves', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Pokemon::class)->constrained()->cascadeOnDelete();
-            $table->string('slot');
-            $table->string('type');
+            $table->string('move');
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('types');
+        Schema::dropIfExists('moves');
     }
 };

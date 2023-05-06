@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up()
     {
-        Schema::create('sprites', function (Blueprint $table) {
+        Schema::create('pokemon_sprites', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Pokemon::class)->constrained()->cascadeOnDelete();
             $table->string('front_default');

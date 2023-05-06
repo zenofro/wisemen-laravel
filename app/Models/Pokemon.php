@@ -11,26 +11,26 @@ class Pokemon extends Model
 
     public function sprites(): HasMany
     {
-        return $this->hasMany(Sprite::class);
+        return $this->hasMany(PokemonSprite::class);
     }
 
     public function types(): HasMany
     {
-        return $this->hasMany(Type::class);
+        return $this->hasMany(PokemonType::class);
     }
 
     public function stats(): HasMany
     {
-        return $this->hasMany(Stat::class);
+        return $this->hasMany(PokemonStat::class);
     }
 
     public function abilities(): HasMany
     {
-        return $this->hasMany(Ability::class);
+        return $this->hasMany(PokemonAbility::class);
     }
 
     public function moves(): HasMany
     {
-        return $this->hasMany(Move::class);
+        return $this->hasMany(PokemonMove::class);
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up()
     {
-        Schema::create('abilities', function (Blueprint $table) {
+        Schema::create('pokemon_abilities', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Pokemon::class)->constrained()->cascadeOnDelete();
             $table->boolean('is_hidden');
