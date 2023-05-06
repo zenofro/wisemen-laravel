@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Pokemon extends Model
 {
     protected $guarded = ['id'];
 
-    public function sprites(): HasMany
+    public function sprite(): HasOne
     {
-        return $this->hasMany(PokemonSprite::class);
+        return $this->HasOne(PokemonSprite::class);
     }
 
     public function types(): HasMany
