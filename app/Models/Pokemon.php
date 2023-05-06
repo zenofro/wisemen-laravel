@@ -23,4 +23,9 @@ class Pokemon extends Model
     {
         return $this->hasMany(Stat::class);
     }
+
+    public function abilities(): HasMany
+    {
+        return $this->hasMany(Ability::class);
+    }
 }
