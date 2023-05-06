@@ -9,6 +9,14 @@ class IndexPokemonController
 {
     public function __invoke()
     {
-        return new PokemonCollection(Pokemon::all());
+        return new PokemonCollection(
+            Pokemon::with([
+                'sprite',
+                'abilities',
+                'moves.versions',
+                'stats',
+                'types',
+            ])->get()
+        );
     }
 }

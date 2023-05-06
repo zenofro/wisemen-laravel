@@ -20,10 +20,11 @@ class PokemonResource extends JsonResource
             'form' => $this->form,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'abilities_count' => $this->abilities_count,
-            'moves_count' => $this->moves_count,
-            'stats_count' => $this->stats_count,
-            'types_count' => $this->types_count,
+            'sprites' => new PokemonSpriteResource($this->whenLoaded('sprite')),
+            'abilities' => PokemonAbilityResource::collection($this->whenLoaded('abilities')),
+            'moves' => PokemonMoveResource::collection($this->whenLoaded('moves')),
+            'stats' => PokemonStatResource::collection($this->whenLoaded('stats')),
+            'types' => PokemonTypeResource::collection($this->whenLoaded('types')),
         ];
     }
 }
