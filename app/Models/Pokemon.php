@@ -13,4 +13,9 @@ class Pokemon extends Model
     {
         return $this->hasMany(Sprite::class);
     }
+
+    public function types(): HasMany
+    {
+        return $this->hasMany(Type::class);
+    }
 }
