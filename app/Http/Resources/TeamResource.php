@@ -15,7 +15,7 @@ class TeamResource extends JsonResource
             'name' => $this->name,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'pokemons' => PokemonCollection::collection($this->whenLoaded('pokemons')),
+            'pokemons' =>  $this->whenLoaded('pokemons', fn () => PokemonResource::collection($this->pokemons)),
         ];
     }
 }

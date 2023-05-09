@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\Pokemons\IndexPokemonController;
 use App\Http\Controllers\Api\V1\Pokemons\SearchPokemonController;
 use App\Http\Controllers\Api\V1\Pokemons\ShowPokemonController;
+use App\Http\Controllers\Api\V1\Teams\AttachPokemonsToTeamController;
 use App\Http\Controllers\Api\V1\Teams\IndexTeamController;
 use App\Http\Controllers\Api\V1\Teams\ShowTeamController;
 use App\Http\Controllers\Api\V1\Teams\StoreTeamController;
@@ -24,6 +25,7 @@ Route::prefix('v1')->group(function (){
         Route::get('/', IndexTeamController::class);
         Route::post('create', StoreTeamController::class);
         Route::get('{team}', ShowTeamController::class);
+        Route::post('{team}', AttachPokemonsToTeamController::class);
     });
 });
 
