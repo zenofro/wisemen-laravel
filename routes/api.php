@@ -10,10 +10,6 @@ use App\Http\Controllers\Api\V1\Teams\StoreTeamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::prefix('v1')->group(function (){
     Route::prefix('pokemons')->group(function (){
         Route::get('/', IndexPokemonController::class);
@@ -21,7 +17,7 @@ Route::prefix('v1')->group(function (){
         Route::get('{pokemon}', ShowPokemonController::class);
     });
 
-    Route::prefix('teams')->group(function (){
+    Route::prefix('teams')->middleware(['auth:sanctum'])->group(function (){
         Route::get('/', IndexTeamController::class);
         Route::post('create', StoreTeamController::class);
         Route::get('{team}', ShowTeamController::class);
