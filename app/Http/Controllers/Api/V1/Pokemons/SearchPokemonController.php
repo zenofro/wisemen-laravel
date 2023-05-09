@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api\V1\Pokemons;
 
 use App\Http\Resources\PokemonCollection;
 use App\Models\Pokemon;
+use App\Models\PokemonType;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class SearchPokemonController
@@ -27,6 +29,22 @@ class SearchPokemonController
             ->take($request->input('limit'))
             ->get();
 
-        return new PokemonCollection($pokemons);
+        return new JsonResponse([
+            'data' => $pokemons->map(function (Pokemon $pokemon){
+                return [
+                    'id' => $pokemon->id,
+                    'name' => $pokemon->name,
+                    'sprites' => ['front_default' => $pokemon->sprite?->front_default],
+                    'types' => $pokemon->types->map(function (PokemonType $type){
+                        return [
+                            'type' => ['name' => $type->type],
+                            'slot' => $type->slot,
+                        ];
+                    })
+                ];
+            })
+        ]);
+
+        // return new PokemonCollection($pokemons);
     }
 }
