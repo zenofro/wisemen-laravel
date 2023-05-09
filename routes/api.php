@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\V1\Pokemons\IndexPokemonController;
 use App\Http\Controllers\Api\V1\Pokemons\SearchPokemonController;
 use App\Http\Controllers\Api\V1\Pokemons\ShowPokemonController;
+use App\Http\Controllers\Api\V1\Teams\StoreTeamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,11 @@ Route::prefix('v1')->group(function (){
         Route::get('/', IndexPokemonController::class);
         Route::get('search', SearchPokemonController::class);
         Route::get('{pokemon}', ShowPokemonController::class);
+    });
+
+    Route::prefix('teams')->group(function (){
+        // Route::get('/', IndexPokemonController::class);
+        Route::post('create', StoreTeamController::class);
     });
 });
 
