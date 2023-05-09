@@ -15,3 +15,9 @@ Route::prefix('v1')->group(function (){
         Route::get('{pokemon}', ShowPokemonController::class);
     });
 });
+
+Route::prefix('v2')->group(function (){
+    Route::prefix('pokemons')->group(function (){
+        Route::get('/', \App\Http\Controllers\Api\V2\Pokemons\IndexPokemonController::class);
+    });
+});
