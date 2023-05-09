@@ -3,6 +3,8 @@
 namespace App\Actions;
 
 use App\Models\Pokemon;
+use App\Models\PokemonSprite;
+use Illuminate\Support\Facades\Storage;
 
 class CreatePokemonFromExternalData
 {
@@ -31,16 +33,26 @@ class CreatePokemonFromExternalData
             ]);
         }
 
-        $pokemon->sprite()->create([
+        $sprite = new PokemonSprite();
+        $sprite->pokemon_id = $pokemon->id;
+
+        if ($data['sprites']['front_default']){
+            $path = "{$pokemon->id}/front_default.png";
+            $success = Storage::disk('public')->put($path, file_get_contents($data['sprites']['front_default']));
+            $sprite->front_default = $success ? $path : null;
+        }
+
+        $sprite->fill([
             'back_default' => $data['sprites']['back_default'],
             'back_female' => $data['sprites']['back_female'],
             'back_shiny' => $data['sprites']['back_shiny'],
             'back_shiny_female' => $data['sprites']['back_shiny_female'],
-            'front_default' => $data['sprites']['front_default'],
             'front_female' => $data['sprites']['front_female'],
             'front_shiny' => $data['sprites']['front_shiny'],
             'front_shiny_female' => $data['sprites']['front_shiny_female'],
         ]);
+
+        $sprite->save();
 
         foreach ($data['stats'] as $stat) {
             $pokemon->stats()->create([

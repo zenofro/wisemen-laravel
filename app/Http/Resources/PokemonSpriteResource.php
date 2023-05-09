@@ -12,7 +12,7 @@ class PokemonSpriteResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'front_default' => $this->front_default,
+            'front_default' => url("storage/$this->front_default"),
             'front_shiny' => $this->front_shiny,
             'front_female' => $this->front_female,
             'front_shiny_female' => $this->front_shiny_female,
