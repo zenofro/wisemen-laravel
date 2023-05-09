@@ -11,9 +11,12 @@
 |
 */
 
+use Tests\CreatesApplication;
+
 uses(
     Tests\TestCase::class,
-    // Illuminate\Foundation\Testing\RefreshDatabase::class,
+    CreatesApplication::class,
+    Illuminate\Foundation\Testing\RefreshDatabase::class,
 )->in('Feature');
 
 /*
