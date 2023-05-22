@@ -6,6 +6,7 @@ use App\Http\Resources\TeamResource;
 use App\Models\Pokemon;
 use App\Models\Team;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -16,7 +17,7 @@ class AttachPokemonsToTeamController
     public function __invoke(Team $team, Request $request)
     {
         $this->validate($request, [
-            'pokemons' => ['nullable', 'array'],
+            'pokemons' => ['nullable', 'array', 'max:6'],
             'pokemons.*' => [Rule::in(Pokemon::pluck('id'))],
         ]);
 
