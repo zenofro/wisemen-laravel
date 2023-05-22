@@ -11,7 +11,7 @@ it('can attach pokemons to an existing team', function (){
 
     $team = Team::factory()->create();
 
-    $pokemons = Pokemon::factory(10)->create();
+    $pokemons = Pokemon::factory(5)->create();
 
     $this
         ->post(action(AttachPokemonsToTeamController::class, $team), ['pokemons' => $pokemons->pluck('id')->toArray()])
@@ -21,4 +21,16 @@ it('can attach pokemons to an existing team', function (){
         $pokemons->pluck('id')->toArray(),
         $team->fresh()->pokemons->pluck('id')->toArray()
     );
+});
+
+it('can not attach more than 6 pokemons to an existing team', function (){
+    Sanctum::actingAs(User::factory()->create());
+
+    $team = Team::factory()->create();
+
+    $pokemons = Pokemon::factory(10)->create();
+
+    $this
+        ->post(action(AttachPokemonsToTeamController::class, $team), ['pokemons' => $pokemons->pluck('id')->toArray()], ['Accept' => 'application/json'])
+        ->assertStatus(422);
 });

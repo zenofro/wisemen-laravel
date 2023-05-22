@@ -33,6 +33,7 @@ class PokemonSeedCommand extends Command
 
         $bar->finish();
 
+        $this->newLine();
         $this->info('Successfully imported all pokémons!');
     }
 }
